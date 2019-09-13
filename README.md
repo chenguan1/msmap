@@ -1,2 +1,2 @@
-# MsMap
-MsMap For Dream
+# msmap
+Mapscope Map, based on Mapserver.
