@@ -1,9 +1,7 @@
-package model
+package main
 
 import (
-	//"encoding/json"
 	"time"
-	//"github.com/jinzhu/gorm"
 )
 
 // Dataset 数据集定义结构
@@ -17,4 +15,11 @@ type Dataset struct {
 	Geotype   string    `json:"geotype"`
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
+}
+
+// Save 更新/创建数据（集）
+func (dt *Dataset) Save() error {
+	tmp := &Dataset{}
+	err := db.Where("id = ?", dt.ID).First(tmp).Error
+	return err
 }

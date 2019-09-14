@@ -1,14 +1,29 @@
 package main
 
 import (
-	"fmt"
+	"github.com/chenguan1/msmap/mswrap"
+	"github.com/jinzhu/gorm"
+	log "github.com/sirupsen/logrus"
+)
 
-	"github.com/chenguan1/msmap/model"
+const (
+	VERSION = "1.0.0"
+)
+
+var (
+	db *gorm.DB
 )
 
 func main() {
-	ds := &model.Dataset{}
-	ms := &model.Mapset{}
-	fmt.Printf("%#v\n", ds)
-	fmt.Printf("%#v\n", ms)
+
+	// mapserver
+	mswrap.Start()
+
+	r := setupRouter()
+
+	log.Infoln("start main server.")
+	r.Run(":8090")
+
+	log.Info("exit.")
+
 }

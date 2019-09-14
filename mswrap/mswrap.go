@@ -3,13 +3,30 @@ package mswrap
 import (
 	"net/http"
 	"net/http/cgi"
+	"net/http/httputil"
 
+	"github.com/gin-gonic/gin"
 	log "github.com/sirupsen/logrus"
 )
 
-func main() {
+// Mapserver Host Info
+const HostMapServ = "127.0.0.1:8049"
 
-	http.HandleFunc("/ms", func(w http.ResponseWriter, r *http.Request) {
+var proxyMapServ = httputil.ReverseProxy{
+	Director: func(req *http.Request) {
+		req.URL.Scheme = "http"
+		req.URL.Host = HostMapServ
+		req.Host = HostMapServ
+	},
+}
+
+func HandleMapServ(ctx *gin.Context) {
+	ctx.Request.Header.Add("requester-uid", "id")
+	proxyMapServ.ServeHTTP(ctx.Writer, ctx.Request)
+}
+
+func Start() {
+	http.HandleFunc("/api/v1/ms", func(w http.ResponseWriter, r *http.Request) {
 		handler := new(cgi.Handler)
 		handler.Path = "D:/ms4w/Apache/cgi-bin/mapserv"
 		handler.Env = append(handler.Env, "GDAL_DATA=d:/ms4w/gdaldata")
@@ -21,17 +38,9 @@ func main() {
 		handler.ServeHTTP(w, r)
 	})
 
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		handler := new(cgi.Handler)
-		handler.Path = "D:/ms4w/Apache/cgi-bin/mapcache.fcgi.exe"
-		handler.Env = append(handler.Env, "MAPCACHE_CONFIG_FILE=D:/ms4w/apps/mapcache/mapcache.xml")
-
-		log.Println(r.RemoteAddr, r.RequestURI)
-
-		handler.ServeHTTP(w, r)
-	})
-
-	log.Infoln("Starting MapServer...")
-	log.Fatalln(http.ListenAndServe(":8035", nil))
-
+	// 启动服务
+	go func() {
+		log.Infoln("start mswraper.")
+		log.Fatalln(http.ListenAndServe(":8049", nil))
+	}()
 }
