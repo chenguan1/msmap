@@ -34,7 +34,6 @@ func setupRouter() *gin.Engine {
 				dt.POST("/upload", uploadData)
 				dt.POST("/", createDataset)
 			}
-
 		}
 	}
 

@@ -1,9 +1,16 @@
 package main
 
 import (
+	"archive/zip"
+	"io"
 	"net/http"
+	"os"
+	"path/filepath"
+	"strings"
 
 	"github.com/gin-gonic/gin"
+	log "github.com/sirupsen/logrus"
+	"golang.org/x/text/encoding/simplifiedchinese"
 )
 
 var codes = map[int]string{
@@ -123,4 +130,64 @@ func (res *Res) DoneData(c *gin.Context, data interface{}) {
 func (res *Res) Reset() {
 	res.Code = http.StatusOK
 	res.Msg = codes[http.StatusOK]
+}
+
+// 解压文件 zip
+func UnZipToDir(zipfile string, outdir string) error {
+	if outdir == "" {
+		outdir = strings.TrimSuffix(zipfile, filepath.Ext(zipfile))
+	}
+	err := os.MkdirAll(outdir, os.ModePerm)
+	if err != nil {
+		log.Error(err)
+		return err
+	}
+
+	zr, err := zip.OpenReader(zipfile)
+	if err != nil {
+		log.Error(err)
+		return err
+	}
+	defer zr.Close()
+
+	for _, f := range zr.File {
+		name := f.Name
+		if f.NonUTF8 {
+			// simplifiedchinese.GBK.NewDecoder().String
+			ns, err := simplifiedchinese.GB18030.NewDecoder().String(f.Name)
+			if err == nil {
+				name = ns
+			}
+		}
+		pn := filepath.Join(outdir, name)
+		// log.Infof("Uncompress: %s -> %s", name, pn)
+		if f.FileInfo().IsDir() {
+			err := os.MkdirAll(pn, os.ModePerm)
+			if err != nil {
+				log.Warnf("unzip %s: %v", zipfile, err)
+				return err
+			}
+			continue
+		}
+		ext := filepath.Ext(name)
+		pn = strings.TrimSuffix(pn, ext) + strings.ToLower(ext)
+		w, err := os.Create(pn)
+		if err != nil {
+			log.Warnf("Cannot unzip %s: %v", zipfile, err)
+			return err
+		}
+		defer w.Close()
+		r, err := f.Open()
+		if err != nil {
+			log.Warnf("Cannot unzip %s: %v", zipfile, err)
+			return err
+		}
+		defer r.Close()
+		_, err = io.Copy(w, r)
+		if err != nil {
+			log.Warnf("Cannot unzip %s: %v", zipfile, err)
+			return err
+		}
+	}
+	return nil
 }

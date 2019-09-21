@@ -2,18 +2,124 @@ package main
 
 import (
 	"fmt"
+	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strconv"
 	"strings"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	log "github.com/sirupsen/logrus"
 	"github.com/teris-io/shortid"
 )
 
-func loadZipFile(path string, dss []*Dataset) error {
-	return nil
+//valSizeShp valid shapefile, return 0 is invalid
+func valSizeShp(shp string) int64 {
+	ext := filepath.Ext(shp)
+	if strings.Compare(SHPEXT, ext) != 0 {
+		return 0
+	}
+	info, err := os.Stat(shp)
+	if err != nil {
+		return 0
+	}
+	total := info.Size()
+
+	pathname := strings.TrimSuffix(shp, ext)
+	info, err = os.Stat(pathname + ".dbf")
+	if err != nil {
+		return 0
+	}
+	total += info.Size()
+
+	info, err = os.Stat(pathname + ".shx")
+	if err != nil {
+		return 0
+	}
+	total += info.Size()
+
+	info, err = os.Stat(pathname + ".prj")
+	if err != nil {
+		return 0
+	}
+	total += info.Size()
+
+	return total
+}
+
+func getDatafiles(dir string) (map[string]int64, error) {
+	files := make(map[string]int64)
+	itmes, err := ioutil.ReadDir(dir)
+	if err != nil {
+		return files, err
+	}
+	for _, item := range itmes {
+		name := item.Name()
+		if item.IsDir() {
+			subfiles, _ := getDatafiles(filepath.Join(dir, name))
+			for k, v := range subfiles {
+				files[k] = v
+			}
+		}
+		ext := filepath.Ext(name)
+		//处理zip内部数据文件
+		switch ext {
+		case CSVEXT, GEOJSONEXT, KMLEXT, GPXEXT:
+			files[filepath.Join(dir, name)] = item.Size()
+		case SHPEXT:
+			shp := filepath.Join(dir, name)
+			size := valSizeShp(shp)
+			if size > 0 {
+				files[shp] = size
+			}
+		default:
+		}
+	}
+	return files, nil
+}
+
+func loadZipData(zipfile string) ([]*Dataset, error) {
+	var dss []*Dataset
+	wd, _ := os.Getwd()
+	tmpdir := strings.TrimSuffix(zipfile, filepath.Ext(zipfile))
+	err := UnZipToDir(zipfile, tmpdir)
+	if err != nil {
+		return nil, err
+	}
+	files, err := getDatafiles(tmpdir)
+	if err != nil {
+		return nil, err
+	}
+	for file, size := range files {
+		subase, err := filepath.Rel(tmpdir, file)
+		if err != nil {
+			subase = filepath.Base(file)
+		}
+		wdpath, err := filepath.Rel(wd, file)
+		if err != nil {
+			return nil, err
+		}
+		ext := filepath.Ext(file)
+		subname := filepath.ToSlash(subase)
+		subname = strings.Replace(subname, "/", "_", -1)
+		subname = strings.TrimSuffix(subname, ext)
+		subid, _ := shortid.Generate()
+		subdt := &Dataset{
+			ID:        subid,
+			Name:      subname,
+			Tag:       "",
+			Format:    strings.ToLower(ext),
+			Path:      wdpath,
+			Size:      size,
+			Geotype:   "Unknown",
+			CreatedAt: time.Time{},
+			UpdatedAt: time.Time{},
+		}
+		dss = append(dss, subdt)
+	}
+
+	return dss, nil
 }
 
 func saveDatas(c *gin.Context) ([]*Dataset, error) {
@@ -84,10 +190,11 @@ func saveDatas(c *gin.Context) ([]*Dataset, error) {
 		}
 		dss = append(dss, dt)
 	} else {
-		err = loadZipFile(fulpath, dss)
+		dss2, err := loadZipData(fulpath)
 		if err != nil {
-			//
+			return nil, fmt.Errorf(`handleDataset, unzip file error, details: %s`, err)
 		}
+		dss = append(dss, dss2...)
 	}
 
 	return dss, nil
