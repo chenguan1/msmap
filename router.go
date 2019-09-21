@@ -30,8 +30,9 @@ func setupRouter() *gin.Engine {
 			// dataset : /api/v1/dataset
 			dt := v1.Group("/dataset")
 			{
-				//dt.GET("/", listDataset)
+				dt.GET("/", listDataset)
 				dt.POST("/upload", uploadData)
+				dt.POST("/", createDataset)
 			}
 
 		}
