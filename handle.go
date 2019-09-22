@@ -14,3 +14,4 @@ func hello(c *gin.Context) {
 func ping(c *gin.Context) {
 	c.String(http.StatusOK, "Pong")
 }
+
