@@ -123,6 +123,7 @@ func loadZipData(zipfile string) ([]*Dataset, error) {
 }
 
 func saveDatas(c *gin.Context) ([]*Dataset, error) {
+
 	// working folder
 	var wd string
 	var err error
@@ -170,6 +171,7 @@ func saveDatas(c *gin.Context) ([]*Dataset, error) {
 
 	subpath := filepath.Join(subdir, name_new)
 	fulpath := filepath.Join(wd, subpath)
+
 	if err := c.SaveUploadedFile(file, fulpath); err != nil {
 		return nil, fmt.Errorf(`handleDataset, saving uploaded file error, details: %s`, err)
 	}
@@ -197,8 +199,13 @@ func saveDatas(c *gin.Context) ([]*Dataset, error) {
 		dss = append(dss, dss2...)
 	}
 
+	// 尝试读取信息，获取它的Geotype
+
 	return dss, nil
 }
+
+////////////////////////////////////////////////////////////////
+////////////////////////// -handle- ////////////////////////////
 
 func uploadData(c *gin.Context) {
 	res := NewRes()
@@ -212,6 +219,15 @@ func uploadData(c *gin.Context) {
 
 	if dss == nil || len(dss) == 0 {
 		res.FailMsg(c, "未找到数据")
+	}
+
+	//log.Info("begin load datasource")
+
+	for _,dt := range dss{
+		err := dt.LoadFrom()
+		if err != nil{
+			log.Errorf("load from failed, error: %v",err)
+		}
 	}
 
 	// 上传结果返回前端，前端决定是否导入
@@ -282,6 +298,8 @@ func createDataset(c *gin.Context) {
 		res.FailErr(c, err)
 		return
 	}
+
+	// 更新mapfile
 
 	if err = dt.Save(); err != nil {
 		log.Warnf("create database failed, err: %s", err)

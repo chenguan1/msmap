@@ -5,7 +5,8 @@ import (
 
 	"github.com/chenguan1/msmap/mswrap"
 	"github.com/jinzhu/gorm"
-	_ "github.com/mattn/go-sqlite3"
+	//_ "github.com/mattn/go-sqlite3"
+	_ "github.com/shaxbee/go-spatialite" // Spatialite SQL Driver for Golang
 	log "github.com/sirupsen/logrus"
 )
 
