@@ -11,8 +11,10 @@ import (
 
 // Mapserver Host Info
 const HostMapServ = "127.0.0.1:8049"
+const UrlMapServ = "http://127.0.0.1:8049/api/v1/ms"
+const PathMapServ = "/api/v1/ms"
 
-var proxyMapServ = httputil.ReverseProxy{
+var ProxyMapServ = httputil.ReverseProxy{
 	Director: func(req *http.Request) {
 		req.URL.Scheme = "http"
 		req.URL.Host = HostMapServ
@@ -22,7 +24,7 @@ var proxyMapServ = httputil.ReverseProxy{
 
 func HandleMapServ(ctx *gin.Context) {
 	ctx.Request.Header.Add("requester-uid", "id")
-	proxyMapServ.ServeHTTP(ctx.Writer, ctx.Request)
+	ProxyMapServ.ServeHTTP(ctx.Writer, ctx.Request)
 }
 
 func Start() {

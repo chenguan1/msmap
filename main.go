@@ -45,9 +45,6 @@ func initDb() (*gorm.DB, error) {
 }
 
 func main() {
-	test()
-	return
-
 	var err error
 	db, err = initDb()
 	if err != nil {

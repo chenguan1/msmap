@@ -34,6 +34,12 @@ type Field struct {
 	Index string    `json:"index"`
 }
 
+type BBox struct {
+	MinX float64    `json:"minx"`
+	MinY float64    `json:"miny"`
+	MaxX float64    `json:"maxx"`
+	MaxY float64    `json:"maxy"`
+}
 
 // Dataset 数据集定义结构
 type Dataset struct {
@@ -45,7 +51,7 @@ type Dataset struct {
 	Encoding  string          `json:"encoding"`
 	Size      int64           `json:"size"`
 	Total     int             `json:"total"`
-	BBox      [4]float64      `json:"bbox" gorm:"type:json"`
+	BBox      BBox            `json:"bbox"` //gorm:"type:json"
 	Crs       string          `json:"crs"` //WGS84,CGCS2000,GCJ02,BD09
 	//Rows      [][]string      `json:"rows" gorm:"-"`
 	Rows      [][]string      `json:"-" gorm:"-"`
@@ -309,7 +315,12 @@ types := make([]FieldType, len(headers))
 	if err != nil {
 		return err
 	}
-	dt.BBox = bbox
+	dt.BBox = BBox{
+		MinX:bbox[0],
+		MinY:bbox[1],
+		MaxX:bbox[2],
+		MaxY:bbox[3],
+	}
 
 	dt.Format = CSVEXT
 	dt.Total = rowNum
@@ -375,7 +386,6 @@ out:
 	}
 	return nil
 }
-
 
 func mergeBBox(box1 orb.Bound, box2 orb.Bound) orb.Bound{
 	box := box1
@@ -514,10 +524,12 @@ func (dt *Dataset) LoadFromJson() error {
 	}
 	fmt.Printf("total features %d, takes: %v\n", rowNum, time.Since(s))
 
-	dt.BBox[0] = bbox.Min[0]
-	dt.BBox[1] = bbox.Min[1]
-	dt.BBox[2] = bbox.Max[0]
-	dt.BBox[3] = bbox.Max[1]
+	dt.BBox = BBox{
+		MinX:bbox.Min[0],
+		MinY:bbox.Min[1],
+		MaxX:bbox.Max[0],
+		MaxY:bbox.Max[1],
+	}
 
 	dt.Format = GEOJSONEXT
 	dt.Total = rowNum
@@ -624,10 +636,12 @@ func (dt *Dataset) LoadFromShp() error {
 		geoType = "MultiPoint"
 	}
 
-	dt.BBox[0] = bbox.MinX
-	dt.BBox[1] = bbox.MinY
-	dt.BBox[2] = bbox.MaxX
-	dt.BBox[3] = bbox.MaxY
+	dt.BBox = BBox{
+		MinX:bbox.MinX,
+		MinY:bbox.MinY,
+		MaxX:bbox.MaxX,
+		MaxY:bbox.MaxY,
+	}
 
 	dt.Format = SHPEXT
 	dt.Size = size

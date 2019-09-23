@@ -33,6 +33,7 @@ func setupRouter() *gin.Engine {
 				dt.GET("/", listDataset)
 				dt.POST("/upload", uploadData)
 				dt.POST("/", createDataset)
+				dt.GET("/:id/wms", wmsDataset)
 			}
 		}
 	}

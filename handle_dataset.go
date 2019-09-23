@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/chenguan1/msmap/mswrap"
 	"io/ioutil"
 	"os"
 	"path/filepath"
@@ -300,13 +301,51 @@ func createDataset(c *gin.Context) {
 	}
 
 	// 更新mapfile
+	mf := Mapfile{}
+	mf.layers = append(mf.layers, dt)
+	wd, _ := os.Getwd()
+	mapfile := filepath.Join(wd, "data/mapfiles", dt.ID + ".map")
+	err = mf.Generate(dt.Name, mapfile)
+	if err != nil {
+		log.Errorf("generate mapfile failed, error: %v", err)
+		res.FailMsg(c, "geneate mapfile failed.")
+		return
+	}
+	dt.Mapfile = mapfile
 
+	//log.Infof("dataset: %#v",dt)
+
+	// 保存到数据库
 	if err = dt.Save(); err != nil {
 		log.Warnf("create database failed, err: %s", err)
 		res.FailErr(c, err)
 		return
 	}
 
-	res.Done(c, "ok")
+	res.DoneData(c, dt)
+}
 
+// wms 预览数据集
+func wmsDataset(c *gin.Context){
+	res := NewRes()
+	id := c.Param("id")
+	dt := &Dataset{}
+	err := db.Where("id = ?", id).First(dt).Error
+	if err != nil {
+		res.Fail(c,4046)
+		return
+	}
+
+	// path
+	c.Request.URL.Path = mswrap.PathMapServ
+
+	// rawquery
+	mpf := filepath.ToSlash(dt.Mapfile)
+	addParam := "map="+mpf
+	if c.Request.URL.RawQuery != ""{
+		c.Request.URL.RawQuery = c.Request.URL.RawQuery +  "&"
+	}
+	c.Request.URL.RawQuery = c.Request.URL.RawQuery +  addParam
+
+	mswrap.ProxyMapServ.ServeHTTP(c.Writer, c.Request)
 }

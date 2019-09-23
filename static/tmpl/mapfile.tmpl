@@ -1,0 +1,40 @@
+MAP
+  NAME "{{.Name}}"
+  SIZE 600 400
+  EXTENT {{.BBox}}
+  UNITS DD
+  PROJECTION
+    "init=EPSG:4326"
+  END
+
+  WEB
+    TEMPLATE void
+    IMAGEPATH "d:/ms4w/tmp/ms_tmp/"
+    IMAGEURL "/ms_tmp/"
+    METADATA
+      "wms_title" "wms_from_mapserver"
+      "wms_onlineresource" "{{.Mshost}}?map={{.Mapfile}}"
+      "wms_abstract"  "This is a simple map for view one layer."
+
+      "wms_srs" "EPSG:4326 EPSG:900913 EPSG:3857"
+      "wms_enable_request" "*"
+      "wms_feature_info_mine_type" "text/html"
+    END
+    TEMPLATE "void"
+  END
+
+  {{range .Layers}}
+  LAYER
+    NAME {{.Name}}
+    TYPE {{.Geotype}}
+    DATA "{{.Data}}"
+    STATUS default
+
+    CLASS
+      NAME "{{.Name}}"
+      COLOR {{.Color}}
+      OUTLINECOLOR {{.OutlineColor}}
+    END
+  END
+  {{end}}
+END

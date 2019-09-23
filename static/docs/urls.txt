@@ -1,0 +1,4 @@
+http://127.0.0.1/cgi-bin/mapserv.exe?mode=map&layers=all&map=E:/_GisWork/mapafiles/localfile.map
+http://127.0.0.1:8049/api/v1/ms?mode=map&layers=all&map=E:/_GisWork/mapafiles/localfile-msmap.map
+
+http://127.0.0.1:8049/api/v1/ms?mode=map&layers=all&map=E:/go/src/github.com/chenguan1/msmap/data/mapfiles/NWSagbtZR.map
