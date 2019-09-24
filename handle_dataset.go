@@ -349,3 +349,29 @@ func wmsDataset(c *gin.Context){
 
 	mswrap.ProxyMapServ.ServeHTTP(c.Writer, c.Request)
 }
+
+// wms 预览数据集
+func xyzDataset(c *gin.Context){
+	res := NewRes()
+	id := c.Param("id")
+	dt := &Dataset{}
+	err := db.Where("id = ?", id).First(dt).Error
+	if err != nil {
+		res.Fail(c,4046)
+		return
+	}
+
+	// path
+	c.Request.URL.Path = mswrap.PathMapServ
+
+	// rawquery
+	mpf := filepath.ToSlash(dt.Mapfile)
+	addParam := "map="+mpf
+	if c.Request.URL.RawQuery != ""{
+		c.Request.URL.RawQuery = c.Request.URL.RawQuery +  "&"
+	}
+	c.Request.URL.RawQuery = c.Request.URL.RawQuery +  addParam
+
+	mswrap.ProxyMapServ.ServeHTTP(c.Writer, c.Request)
+}
+

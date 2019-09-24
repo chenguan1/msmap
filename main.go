@@ -5,8 +5,9 @@ import (
 
 	"github.com/chenguan1/msmap/mswrap"
 	"github.com/jinzhu/gorm"
+	_ "github.com/jinzhu/gorm/dialects/postgres"
 	//_ "github.com/mattn/go-sqlite3"
-	_ "github.com/shaxbee/go-spatialite" // Spatialite SQL Driver for Golang
+	//_ "github.com/shaxbee/go-spatialite" // Spatialite SQL Driver for Golang
 	log "github.com/sirupsen/logrus"
 )
 
@@ -21,10 +22,12 @@ var (
 // 初始化数据库
 func initDb() (*gorm.DB, error) {
 	var conn string
-	dbtype := "sqlite3"
+	dbtype := "postgres"
 	switch dbtype {
 	case "sqlite3":
 		conn = "data/msmap.db"
+	case "postgres":
+		conn = "host=127.0.0.1 port=5432 user=postgres password=123456 dbname=msmap sslmode=disable"
 	default:
 		return nil, fmt.Errorf("unknown database")
 	}

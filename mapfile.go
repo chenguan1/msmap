@@ -30,7 +30,8 @@ func (mf *Mapfile) Generate(name string, mapfile string) error {
 		}
 
 		mc.Layers = append(mc.Layers, mcLayer)
-		box2 := mswrap.NewMapBound(layer.BBox.MinX, layer.BBox.MinY, layer.BBox.MaxX, layer.BBox.MaxY)
+		//box2 := mswrap.NewMapBound(layer.BBox.MinX, layer.BBox.MinY, layer.BBox.MaxX, layer.BBox.MaxY)
+		box2 := mswrap.NewMapBound(layer.MinX, layer.MinY, layer.MaxX, layer.MaxY)
 		if i == 0 {
 			mc.BBox = box2
 		}else{

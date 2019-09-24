@@ -33,31 +33,38 @@ type Field struct {
 	Type  FieldType `json:"type"`
 	Index string    `json:"index"`
 }
-
+/*
 type BBox struct {
 	MinX float64    `json:"minx"`
 	MinY float64    `json:"miny"`
 	MaxX float64    `json:"maxx"`
 	MaxY float64    `json:"maxy"`
-}
+}*/
+/*
+func (box *BBox) String() string{
+	return fmt.Sprintf("%v %v %v %v", box.MinX, box.MinY, box.MaxX, box.MaxY)
+}*/
 
 // Dataset 数据集定义结构
 type Dataset struct {
-	ID        string          `json:"id" gorm:"primary_key"` //字段列表
-	Name      string          `json:"name"`                  //字段列表// 数据集名称,现用于更方便的ID
+	ID        string          `json:"id" gorm:"primary_key"`  //字段列表
+	Name      string          `json:"name"`                     //字段列表// 数据集名称,现用于更方便的ID
 	Tag       string          `json:"tag"`
 	Path      string          `json:"path"`
 	Format    string          `json:"format"`
 	Encoding  string          `json:"encoding"`
 	Size      int64           `json:"size"`
 	Total     int             `json:"total"`
-	BBox      BBox            `json:"bbox"` //gorm:"type:json"
-	Crs       string          `json:"crs"` //WGS84,CGCS2000,GCJ02,BD09
-	//Rows      [][]string      `json:"rows" gorm:"-"`
-	Rows      [][]string      `json:"-" gorm:"-"`
+	// BBox      BBox            `json:"bbox" gorm:"type:json"`
+	MinX      float64         `json:"minx"`
+	MinY      float64         `json:"miny"`
+	MaxX      float64         `json:"maxx"`
+	MaxY      float64         `json:"maxy"`
+
+	Crs       string          `json:"crs"`                      //WGS84,CGCS2000,GCJ02,BD09
+	Rows      [][]string      `json:"-" gorm:"-"`              // `json:"rows" gorm:"-"`
 	Geotype   GeoType         `json:"geotype"`
-	//Fields    json.RawMessage `json:"fields" gorm:"type:json"` //字段列表
-	Fields    json.RawMessage `json:"-" gorm:"-"`
+	Fields    json.RawMessage `json:"-" gorm:"-"`              // `json:"fields" gorm:"type:json"` //字段列表
 	Mapfile   string          `json:"mapfile"`
 	CreatedAt time.Time       `json:"created_at"`
 	UpdatedAt time.Time       `json:"updated_at"`
@@ -315,12 +322,16 @@ types := make([]FieldType, len(headers))
 	if err != nil {
 		return err
 	}
-	dt.BBox = BBox{
+	/*dt.BBox = BBox{
 		MinX:bbox[0],
 		MinY:bbox[1],
 		MaxX:bbox[2],
 		MaxY:bbox[3],
-	}
+	}*/
+	dt.MinX = bbox[0]
+	dt.MinY = bbox[1]
+	dt.MaxX = bbox[2]
+	dt.MaxY = bbox[3]
 
 	dt.Format = CSVEXT
 	dt.Total = rowNum
@@ -524,12 +535,17 @@ func (dt *Dataset) LoadFromJson() error {
 	}
 	fmt.Printf("total features %d, takes: %v\n", rowNum, time.Since(s))
 
-	dt.BBox = BBox{
+	/*dt.BBox = BBox{
 		MinX:bbox.Min[0],
 		MinY:bbox.Min[1],
 		MaxX:bbox.Max[0],
 		MaxY:bbox.Max[1],
-	}
+	}*/
+
+    dt.MinX = bbox.Min[0]
+	dt.MinY = bbox.Min[1]
+	dt.MaxX = bbox.Max[0]
+	dt.MaxY = bbox.Max[1]
 
 	dt.Format = GEOJSONEXT
 	dt.Total = rowNum
@@ -636,12 +652,18 @@ func (dt *Dataset) LoadFromShp() error {
 		geoType = "MultiPoint"
 	}
 
+	/*
 	dt.BBox = BBox{
 		MinX:bbox.MinX,
 		MinY:bbox.MinY,
 		MaxX:bbox.MaxX,
 		MaxY:bbox.MaxY,
-	}
+	}*/
+
+	dt.MinX = bbox.MinX
+	dt.MinY = bbox.MinY
+	dt.MaxX = bbox.MaxX
+	dt.MaxY = bbox.MaxY
 
 	dt.Format = SHPEXT
 	dt.Size = size

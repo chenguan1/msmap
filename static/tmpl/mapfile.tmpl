@@ -9,10 +9,10 @@ MAP
 
   WEB
     TEMPLATE void
-    IMAGEPATH "d:/ms4w/tmp/ms_tmp/"
+    IMAGEPATH "data/tmp/"
     IMAGEURL "/ms_tmp/"
     METADATA
-      "wms_title" "wms_from_mapserver"
+      "wms_title" "{{.Name}}"
       "wms_onlineresource" "{{.Mshost}}?map={{.Mapfile}}"
       "wms_abstract"  "This is a simple map for view one layer."
 

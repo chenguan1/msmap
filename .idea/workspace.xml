@@ -2,15 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3cce4c03-2a35-44e5-bbe6-1b521ff98cd4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/static/docs/urls.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sysinfo.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/docs/exportgeojson.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dataset.go" beforeDir="false" afterPath="$PROJECT_DIR$/dataset.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/handle_dataset.go" beforeDir="false" afterPath="$PROJECT_DIR$/handle_dataset.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mapfile.go" beforeDir="false" afterPath="$PROJECT_DIR$/mapfile.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mswrap/mswrap.go" beforeDir="false" afterPath="$PROJECT_DIR$/mswrap/mswrap.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mswrap/mapfile.go" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/router.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/docs/urls.txt" beforeDir="false" afterPath="$PROJECT_DIR$/static/docs/urls.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/tmpl/mapfile.tmpl" beforeDir="false" afterPath="$PROJECT_DIR$/static/tmpl/mapfile.tmpl" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -36,79 +37,54 @@
     <session id="115055999">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="1" />
-          <entry key="project.open.time.0" value="1" />
+          <entry key="project.closed" value="2" />
+          <entry key="project.open.time.0" value="2" />
           <entry key="project.open.time.1" value="1" />
-          <entry key="project.opened" value="2" />
+          <entry key="project.opened" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="go" value="81" />
+          <entry key="go" value="87" />
           <entry key="html" value="2" />
-          <entry key="tmpl" value="3" />
-          <entry key="txt" value="1" />
+          <entry key="map" value="1" />
+          <entry key="tmpl" value="4" />
+          <entry key="txt" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Go" value="81" />
+          <entry key="Go" value="87" />
           <entry key="HTML" value="2" />
-          <entry key="PLAIN_TEXT" value="4" />
+          <entry key="PLAIN_TEXT" value="8" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="go" value="7501" />
-          <entry key="tmpl" value="20" />
-          <entry key="txt" value="16" />
+          <entry key="go" value="8125" />
+          <entry key="tmpl" value="51" />
+          <entry key="txt" value="62" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Go" value="7501" />
-          <entry key="PLAIN_TEXT" value="36" />
+          <entry key="Go" value="8125" />
+          <entry key="PLAIN_TEXT" value="113" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/handle_dataset.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-70">
-              <caret line="328" column="32" selection-start-line="328" selection-start-column="32" selection-end-line="328" selection-end-column="32" />
+            <state relative-caret-position="-1672">
+              <caret line="11" selection-start-line="11" selection-end-line="11" />
               <folding>
-                <element signature="e#14#191#0" expanded="true" />
+                <element signature="n#!!block;n#createDataset#0" />
+                <element signature="n#!!block;n#wmsDataset#0" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../../gin-gonic/gin/context.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="166">
-              <caret line="47" column="17" selection-start-line="47" selection-start-column="17" selection-end-line="47" selection-end-column="17" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../../gin-gonic/gin/tree.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="114">
-              <caret line="13" column="10" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="10" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/types.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="77">
-              <caret line="30" column="19" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -116,8 +92,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mswrap/mapconfig.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="96">
-              <caret line="76" column="11" selection-start-line="76" selection-start-column="4" selection-end-line="76" selection-end-column="11" />
+            <state relative-caret-position="159">
+              <caret line="55" column="18" selection-start-line="55" selection-start-column="18" selection-end-line="55" selection-end-column="18" />
               <folding>
                 <element signature="n#!!block;n#Union#0" />
               </folding>
@@ -126,10 +102,69 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mswrap/mswrap.go">
+        <entry file="file://$PROJECT_DIR$/mapfile.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
-              <caret line="14" column="17" selection-start-line="14" selection-start-column="6" selection-end-line="14" selection-end-column="17" />
+            <state relative-caret-position="26">
+              <caret line="27" column="45" selection-start-line="27" selection-start-column="45" selection-end-line="27" selection-end-column="45" />
+              <folding>
+                <element signature="e#14#68#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/static/tmpl/mapfile.tmpl">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="228">
+              <caret line="15" column="37" selection-start-line="15" selection-start-column="31" selection-end-line="15" selection-end-column="37" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dataset.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="330">
+              <caret line="654" column="6" selection-start-line="654" selection-start-column="6" selection-end-line="654" selection-end-column="6" />
+              <folding>
+                <element signature="e#14#378#0" expanded="true" />
+                <element signature="n#!!block;n#likelyEncoding#0" />
+                <element signature="n#!!block;n#csvReader#0" />
+                <element signature="n#!!block;n#jsonDecoder#0" />
+                <element signature="n#!!block;n#movetoFeatures#0" />
+                <element signature="n#!!block;n#mergeBBox#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/router.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="247">
+              <caret line="27" column="47" selection-start-line="27" selection-start-column="47" selection-end-line="27" selection-end-column="47" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="171">
+              <caret line="48" selection-start-line="48" selection-end-line="48" />
+              <folding>
+                <element signature="e#14#246#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/static/docs/urls.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="95">
+              <caret line="5" selection-start-line="5" selection-end-line="5" selection-end-column="44" />
             </state>
           </provider>
         </entry>
@@ -162,16 +197,17 @@
         <option value="$PROJECT_DIR$/static/html/dataset_upload.html" />
         <option value="$PROJECT_DIR$/handle.go" />
         <option value="$PROJECT_DIR$/sysinfo.go" />
+        <option value="$PROJECT_DIR$/mswrap/mswrap.go" />
+        <option value="$PROJECT_DIR$/router.go" />
+        <option value="$PROJECT_DIR$/handle_dataset.go" />
         <option value="$PROJECT_DIR$/mswrap/mapfile.go" />
-        <option value="$PROJECT_DIR$/main.go" />
         <option value="$PROJECT_DIR$/dataset.go" />
-        <option value="$PROJECT_DIR$/static/docs/urls.txt" />
+        <option value="$PROJECT_DIR$/mapfile.go" />
         <option value="$PROJECT_DIR$/static/tmpl/mapfile.tmpl" />
         <option value="$PROJECT_DIR$/mswrap/mapconfig.go" />
-        <option value="$PROJECT_DIR$/mapfile.go" />
-        <option value="$PROJECT_DIR$/router.go" />
-        <option value="$PROJECT_DIR$/mswrap/mswrap.go" />
-        <option value="$PROJECT_DIR$/handle_dataset.go" />
+        <option value="$PROJECT_DIR$/static/docs/exportgeojson.txt" />
+        <option value="$PROJECT_DIR$/main.go" />
+        <option value="$PROJECT_DIR$/static/docs/urls.txt" />
       </list>
     </option>
   </component>
@@ -182,9 +218,9 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="698" />
-    <option name="y" value="8" />
-    <option name="width" value="1369" />
+    <option name="x" value="276" />
+    <option name="y" value="86" />
+    <option name="width" value="1438" />
     <option name="height" value="880" />
   </component>
   <component name="ProjectView">
@@ -203,17 +239,6 @@
             <path>
               <item name="msmap" type="b2602c69:ProjectViewProjectNode" />
               <item name="msmap" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="msmap" type="b2602c69:ProjectViewProjectNode" />
-              <item name="msmap" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-              <item name="mapfiles" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="msmap" type="b2602c69:ProjectViewProjectNode" />
-              <item name="msmap" type="462c0819:PsiDirectoryNode" />
               <item name="mswrap" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -225,7 +250,7 @@
               <item name="msmap" type="b2602c69:ProjectViewProjectNode" />
               <item name="msmap" type="462c0819:PsiDirectoryNode" />
               <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="tmpl" type="462c0819:PsiDirectoryNode" />
+              <item name="docs" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -246,8 +271,8 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="E:\go\src\github.com\chenguan1\msmap\mswrap" />
       <recent name="E:\go\src\github.com\chenguan1\msmap" />
+      <recent name="E:\go\src\github.com\chenguan1\msmap\mswrap" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -276,15 +301,15 @@
     </configuration>
   </component>
   <component name="ToolWindowManager">
-    <frame x="274" y="55" width="1369" height="880" extended-state="0" />
+    <frame x="408" y="35" width="1438" height="880" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.262796" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2525399" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3297587" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.29088473" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3378016" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -400,16 +425,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mswrap/mapfile.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="22" column="14" selection-start-line="22" selection-start-column="5" selection-end-line="22" selection-end-column="14" />
-          <folding>
-            <element signature="e#14#72#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../../paulmach/orb/point.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="57">
@@ -431,20 +446,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="8" column="4" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/docs/urls.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="3" column="63" selection-start-line="3" selection-start-column="63" selection-end-line="3" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mapset.go">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -455,10 +456,61 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/util.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-342" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mswrap/mswrap.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="14" column="17" selection-start-line="14" selection-start-column="6" selection-end-line="14" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/types.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="77">
+          <caret line="30" column="19" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../gin-gonic/gin/tree.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="13" column="10" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../gin-gonic/gin/context.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="166">
+          <caret line="47" column="17" selection-start-line="47" selection-start-column="17" selection-end-line="47" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mswrap/mapfile.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/handle_dataset.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1672">
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
+          <folding>
+            <element signature="n#!!block;n#createDataset#0" />
+            <element signature="n#!!block;n#wmsDataset#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/dataset.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="139">
-          <caret line="74" column="53" lean-forward="true" selection-start-line="73" selection-start-column="4" selection-end-line="74" selection-end-column="53" />
+        <state relative-caret-position="330">
+          <caret line="654" column="6" selection-start-line="654" selection-start-column="6" selection-end-line="654" selection-end-column="6" />
           <folding>
             <element signature="e#14#378#0" expanded="true" />
             <element signature="n#!!block;n#likelyEncoding#0" />
@@ -470,10 +522,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/data/mapfiles/ldSuG-pWR.map">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/mapfile.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="29" column="9" lean-forward="true" selection-start-line="29" selection-start-column="9" selection-end-line="29" selection-end-column="9" />
+        <state relative-caret-position="26">
+          <caret line="27" column="45" selection-start-line="27" selection-start-column="45" selection-end-line="27" selection-end-column="45" />
           <folding>
             <element signature="e#14#68#0" expanded="true" />
           </folding>
@@ -482,29 +537,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/static/tmpl/mapfile.tmpl">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="15" column="56" selection-start-line="15" selection-start-column="28" selection-end-line="15" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../gin-gonic/gin/context.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="166">
-          <caret line="47" column="17" selection-start-line="47" selection-start-column="17" selection-end-line="47" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../gin-gonic/gin/tree.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="13" column="10" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="10" />
+        <state relative-caret-position="228">
+          <caret line="15" column="37" selection-start-line="15" selection-start-column="31" selection-end-line="15" selection-end-column="37" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mswrap/mapconfig.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="76" column="11" selection-start-line="76" selection-start-column="4" selection-end-line="76" selection-end-column="11" />
+        <state relative-caret-position="159">
+          <caret line="55" column="18" selection-start-line="55" selection-start-column="18" selection-end-line="55" selection-end-column="18" />
           <folding>
             <element signature="n#!!block;n#Union#0" />
           </folding>
@@ -513,37 +554,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/router.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="35" column="45" selection-start-line="35" selection-start-column="35" selection-end-line="35" selection-end-column="45" />
+        <state relative-caret-position="247">
+          <caret line="27" column="47" selection-start-line="27" selection-start-column="47" selection-end-line="27" selection-end-column="47" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/util.go">
+    <entry file="file://$PROJECT_DIR$/static/docs/exportgeojson.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-342" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/types.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="77">
-          <caret line="30" column="19" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="19" />
+        <state relative-caret-position="114">
+          <caret line="6" column="3" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mswrap/mswrap.go">
+    <entry file="file://$PROJECT_DIR$/main.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="14" column="17" selection-start-line="14" selection-start-column="6" selection-end-line="14" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/handle_dataset.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-70">
-          <caret line="328" column="32" selection-start-line="328" selection-start-column="32" selection-end-line="328" selection-end-column="32" />
+        <state relative-caret-position="171">
+          <caret line="48" selection-start-line="48" selection-end-line="48" />
           <folding>
-            <element signature="e#14#191#0" expanded="true" />
+            <element signature="e#14#246#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/docs/urls.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="5" selection-start-line="5" selection-end-line="5" selection-end-column="44" />
         </state>
       </provider>
     </entry>

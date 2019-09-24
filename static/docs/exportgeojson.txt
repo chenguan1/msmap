@@ -1,0 +1,7 @@
+OUTPUTFORMAT
+     NAME "geojson"
+     DRIVER "OGR/GEOJSON"
+     MIMETYPE "application/json; subtype=geojson"
+     FORMATOPTION "STORAGE=stream"
+     FORMATOPTION "FORM=SIMPLE"
+END
