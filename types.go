@@ -1,5 +1,19 @@
 package main
 
+// CRS coordinate reference system
+type CRS string
+
+// Supported CRSs
+const (
+	WGS84    CRS = "WGS84"
+	CGCS2000     = "CGCS2000"
+	GCJ02        = "GCJ02"
+	BD09         = "BD09"
+)
+
+//CRSs 支持的坐标系
+var CRSs = []CRS{WGS84, CGCS2000, GCJ02, BD09}
+
 // Constants representing TileFormat types
 const (
 	// ZIPEXT     DataFormat = ".zip"

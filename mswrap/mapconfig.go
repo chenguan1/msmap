@@ -46,6 +46,7 @@ func NewMapBound(minx, miny, maxx, maxy float64) MapBound{
 
 type MapLayer struct {
 	Name         string
+	Table        string
 	Data         string
 	Geotype      string
 	Color        MapColor

@@ -27,8 +27,11 @@ MAP
   LAYER
     NAME {{.Name}}
     TYPE {{.Geotype}}
-    DATA "{{.Data}}"
     STATUS default
+
+    CONNECTION "host=127.0.0.1 port=5432 dbname='msmap' user=postgres password=123456"
+    CONNECTIONTYPE POSTGIS
+    DATA "geom from {{.Table}}"
 
     CLASS
       NAME "{{.Name}}"

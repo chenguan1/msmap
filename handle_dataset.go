@@ -164,7 +164,14 @@ func saveDatas(c *gin.Context) ([]*Dataset, error) {
 	}
 
 	// generate id
+	// 不要符号 "_-"
 	id, _ := shortid.Generate()
+	for {
+		if !strings.Contains(id, "-") && !strings.Contains(id, "_"){
+			break
+		}
+		id, _ = shortid.Generate()
+	}
 
 	// file name
 	name := strings.TrimSuffix(file.Filename, ext)
@@ -299,6 +306,15 @@ func createDataset(c *gin.Context) {
 		res.FailErr(c, err)
 		return
 	}
+
+	// 导入到数据库
+	err = dt.Import()
+	if err != nil {
+		log.Errorf("import dataset failed, error: %v", err)
+		res.FailErr(c, err)
+		return
+	}
+
 
 	// 更新mapfile
 	mf := Mapfile{}

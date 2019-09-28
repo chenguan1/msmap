@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/chenguan1/msmap/mswrap"
+	"strings"
 )
 
 type Mapfile struct {
@@ -18,6 +19,7 @@ func (mf *Mapfile) Generate(name string, mapfile string) error {
 
 	for i, layer :=  range mf.layers{
 		mcLayer := mswrap.MapLayer{
+			Table: "lyr_"+strings.ToLower(layer.ID),
 			Name: layer.Name,
 			Data: layer.AbsPath(),
 			Geotype: string(layer.Geotype),
@@ -25,8 +27,10 @@ func (mf *Mapfile) Generate(name string, mapfile string) error {
 			OutlineColor:mswrap.NewMapColor(0,0,255),
 		}
 
-		if mcLayer.Geotype == "MultiPolygon"{
+		if strings.Contains(mcLayer.Geotype, "Polygon"){
 			mcLayer.Geotype = "Polygon"
+		}else if strings.Contains(mcLayer.Geotype, "Line"){
+			mcLayer.Geotype = "Line"
 		}
 
 		mc.Layers = append(mc.Layers, mcLayer)
